@@ -1,10 +1,9 @@
 <?php 
-   session_start();
-
-   include("php/config.php");
-   if(!isset($_SESSION['valid'])){
-    header("Location: index.php");
-   }
+    session_start();
+    include("php/config.php");
+    if (!isset($_SESSION['valid'])) {
+        header("Location: index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,41 +21,36 @@
         </div>
 
         <div class="right-links">
-            <a href="#">Change Profile</a>
             <a href="php/logout.php"> <button class="btn">Log Out</button> </a>
         </div>
     </div>
     <div class="container">
         <div class="box form-box">
             <?php 
-               if(isset($_POST['submit'])){
+               if (isset($_POST['submit'])) {
                 $username = $_POST['username'];
                 $usertype = $_POST['usertype'];
                 $email = $_POST['email'];
-                
 
                 $UserId = $_SESSION['UserId'];
 
                 $edit_query = mysqli_query($conn,"UPDATE tbluser SET UserName='$username', UserType='$usertype', Email='$email' WHERE UserId=$UserId ") or die("error occurred");
 
-                if($edit_query){
+                if ($edit_query) {
                     echo "<div class='message'>
-                    <p>Profile Updated!</p>
-                </div> <br>";
-              echo "<a href='home.php'><button class='btn'>Go Home</button>";
-       
+                            <p>Profile Updated!</p>
+                          </div> <br>";
+                    echo "<a href='home.php'><button class='btn'>Go Home</button>";
                 }
-               }else{
-
+               } else {
                 $UserId = $_SESSION['UserId'];
-                $query = mysqli_query($conn,"SELECT*FROM tbluser WHERE UserId=$UserId ");
+                $query = mysqli_query($conn,"SELECT * FROM tbluser WHERE UserId=$UserId ");
 
-                while($result = mysqli_fetch_assoc($query)){
-                    $res_Uname = $result['UserName'];
-                    $res_Utype = $result['UserType'];
-                    $res_Email = $result['Email'];
+                while($result = mysqli_fetch_assoc($query)) {
+                    $res_Uname = isset($result['UserName']) ? $result['UserName'] : '';
+                    $res_Utype = isset($result['UserType']) ? $result['UserType'] : '';
+                    $res_Email = isset($result['Email']) ? $result['Email'] : '';
                 }
-
             ?>
             <header>Change Profile</header>
             <form action="" method="post">
@@ -75,16 +69,13 @@
                     <input type="text" name="email" id="email" value="<?php echo $res_Email; ?>" autocomplete="off" required>
                 </div>
 
-                
-                
                 <div class="field">
-                    
                     <input type="submit" class="btn" name="submit" value="Update" required>
                 </div>
                 
             </form>
         </div>
         <?php } ?>
-      </div>
+    </div>
 </body>
 </html>

@@ -98,7 +98,7 @@ if (!isset($_SESSION['valid'])) {
                 $res_Utypeid = $result['UserTypeId'];
                 $res_username = $result['UserName'];
                 $res_UserId = $result['UserId'];
-                $res_GroupId = $result['GroupId'];  // Corrected line
+                $res_GroupId = $result['GroupId'];  
                 $res_GroupName = $result['GroupName'];
                 $res_AgencyName = $result['AgencyName'];
             }
@@ -109,7 +109,11 @@ if (!isset($_SESSION['valid'])) {
             echo "<a href='edit.php?UserId=$res_UserId'>Change Profile</a>";
             ?>
 
-            <a href="php/logout.php"> <button class="btn" style="background-color: #3498db;">Log Out</button> </a>
+<a href="php/logout.php">
+    <<button class="btn" style="background-color: #3498db; line-height: normal;">Log Out</button>
+
+</a>
+
 
         </div>
     </div>
@@ -199,25 +203,9 @@ if (!isset($_SESSION['valid'])) {
                     <!-- Accordion -->
                     <div class="w3-card w3-round">
                         <div class="w3-white">
-                            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align">Agencies 10</button>
-                            <div id="Demo1" class="w3-hide w3-container">
-                                <span>ABC Agency</span><br>
-                                <span>XYZ Agency</span><br>
-                                <span>MNP Agency</span>
-                            </div>
-                            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align">Groups</button>
-                            <div id="Demo2" class="w3-hide w3-container">
-                                <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-align"> Users</button>
-                            </div>
 
-                            <div id="Demo3" class="w3-hide w3-container">
-                                <div class="w3-row-padding">
-                                    <br>
-                                    <span>Hritwika</span><br>
-                                    <span>Rupesh</span><br>
-                                    <span>Aarti</span>
-                                </div>
-                            </div>
+                            <button onclick="location.href='userTrans.php'" class="w3-button w3-block w3-theme-l1 w3-left-align" style="background-color: #66bbff;">Go to Transactions Page</button>
+
                         </div>
                     </div>
                     <br>
@@ -266,35 +254,33 @@ if (!isset($_SESSION['valid'])) {
                     <br>
 
                     <!-- Alert Box -->
-                    <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-                        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+                    <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small" style="position: relative; background-color: #f8f8f8; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright" style="cursor: pointer; padding: 10px; margin-top: 0px; color: #555;">
                             <i class="fa fa-remove"></i>
                         </span>
-                        <p>Upcoming Events:</p>
-                        <!-- <img src="/w3images/forest.jpg" alt="Forest" style="width:100%;"> -->
+                        <h3 style="margin-bottom: 15px;">Upcoming Events:</h3>
                         <?php
                         $currentDate = date('Y-m-d');
-                        $sql = "SELECT tblAuction.StartDate, tblAuction.AmountAuctioned, tblGroup.GroupName
-                        FROM tblAuction
-                        JOIN tblGroup ON tblAuction.GroupId = tblGroup.GroupId
-                        WHERE tblAuction.StartDate > '$currentDate'
-                        ORDER BY tblAuction.StartDate ASC
-                        LIMIT 3"; // Limit to 3 upcoming auctions
+                        $sql = "SELECT TblAuction.StartDate, TblAuction.AmountAuctioned, TblGroup.GroupName
+            FROM TblAuction
+            JOIN TblGroup ON TblAuction.GroupId = TblGroup.GroupId
+            WHERE TblAuction.StartDate > '$currentDate'
+            ORDER BY TblAuction.StartDate ASC
+            LIMIT 3";
 
-                        $result = mysqli_query($conn, $sql);
+                        $result = $conn->query($sql);
 
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            echo '<div style="padding: 15px; background-color:#ec8689; color:#ffffff; border-radius: 4px; margin-bottom: 20px;">';
+                        if ($result->num_rows > 0) {
+                            echo '<div style="background-color: #ec8689; color: #fff; border-radius: 8px; padding: 15px; margin-bottom: 20px;">';
 
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '- Group: ' . $row['GroupName'] . '<br>' . ' - Date: ' . $row['StartDate'] . '<br>' . ' - Amount: ' . $row['AmountAuctioned'] . '<br>';
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<p style="margin-bottom: 10px;">- Group: ' . $row['GroupName'] . '<br>- Date: ' . $row['StartDate'] . '<br>- Amount: ' . $row['AmountAuctioned'] . '</p>';
                             }
                             echo '</div>';
                         } else {
-                            echo '<p>No upcoming auctions</p>';
+                            echo '<p style="color: #555;">No upcoming auctions</p>';
                         }
                         ?>
-
                     </div>
 
                     <!-- End Left Column -->
@@ -346,7 +332,7 @@ if (!isset($_SESSION['valid'])) {
                     </div>
 
 
-                    <button onclick="location.href='userTrans.php'">Go to Transactions Page</button>
+        
             
 
 
@@ -407,33 +393,10 @@ if (!isset($_SESSION['valid'])) {
                     <div class="w3-col m2">
                         <div class="w3-card w3-round w3-white w3-center">
                             <div class="w3-container">
-                                <h2 style="color: #333;">Payment</h2>
-
-                                <h2>Transaction Form</h2>
-                                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                                    <label for="amountPaid">Amount:</label>
-                                    <input type="text" id="amountPaid" name="amountPaid" required>
-
-                                    <button type="submit">Submit Request</button>
-                                </form>
-
-                                <?php
-
-                                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                    // Retrieve user input
-                                    $amountPaid = mysqli_real_escape_string($conn, $_POST['amountPaid']);
-
-                                    // Insert into TblTransaction
-                                    $insertTransactionQuery = "INSERT INTO TblTransaction (UserId, AmountPaid) VALUES ('$UserId', '$amountPaid')";
-
-                                    if ($conn->query($insertTransactionQuery) === TRUE) {
-
-                                        echo "Transaction submitted successfully!";
-                                    } else {
-                                        echo "Error: " . $conn->error;
-                                    }
-                                }
-                                ?>
+                            <?php
+                            // Include the payment.php file
+                            include("payment.php");
+                            ?>
 
                             </div>
                         </div>

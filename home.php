@@ -81,9 +81,8 @@ if (!isset($_SESSION['valid'])) {
 <body>
     <div class="nav">
         <div class="logo">
-            <p><a href="home.php">FinTech BC</a> </p>
+            <p><a href="home.php">FinTek</a> </p>
         </div>
-
         <div class="right-links">
 
             <?php
@@ -99,9 +98,14 @@ if (!isset($_SESSION['valid'])) {
             echo "<a href='edit.php?UserId=$res_UserId'>Change Profile</a>";
             ?>
 
-            <a href="php/logout.php"> <button class="btn" style="background-color: #3498db;">Log Out</button> </a>
+            <a href="php/logout.php">
+                <<button class="btn" style="background-color: #3498db; line-height: normal;">Log Out</button>
+
+            </a>
 
         </div>
+
+
     </div>
 
 
@@ -179,84 +183,76 @@ if (!isset($_SESSION['valid'])) {
 
                     <br>
 
-                    <!-- Accordion -->
                     <div class="w3-card w3-round">
                         <div class="w3-white">
-                            <button onclick="myFunction('Demo1')" class="w3-button w3-block w3-theme-l1 w3-left-align">Agencies 10</button>
-                            <div id="Demo1" class="w3-hide w3-container">
-                                <span>ABC Agency</span><br>
-                                <span>XYZ Agency</span><br>
-                                <span>MNP Agency</span>
-                            </div>
-                            <button onclick="myFunction('Demo2')" class="w3-button w3-block w3-theme-l1 w3-left-align">Groups</button>
-                            <div id="Demo2" class="w3-hide w3-container">
-                                <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-align"> Users</button>
+
+                            <button onclick="location.href='Trans.php'" class="w3-button w3-block w3-theme-l1 w3-left-align" style="background-color: #77aaff;">Go to Transactions Page</button>
+
+                            <div id="redirectDiv" style="margin-top: 1px;">
+                                <button onclick="redirectToCreateGroups()" class="w3-button w3-block w3-theme-l2 w3-left-align" style="background-color: #66bbff;">Create Groups</button>
                             </div>
 
-                            <div id="Demo3" class="w3-hide w3-container">
-                                <div class="w3-row-padding">
-                                    <br>
-                                    <span>Hritwika</span><br>
-                                    <span>Rupesh</span><br>
-                                    <span>Aarti</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
+                            <script>
+                                function redirectToCreateGroups() {
+                                    window.location.href = 'Add.php';
+                                }
+                            </script>
 
-                    <!-- Interests -->
-                    <div class="w3-card w3-round w3-white w3-hide-small">
-                        <div class="w3-container">
-                            <p>andd</p>
-                            <p>
-                                <span class="w3-tag w3-small w3-theme-d5">andd</span>
-                                <span class="w3-tag w3-small w3-theme-d4">andd</span>
-                                <span class="w3-tag w3-small w3-theme-d3">andd</span>
-                                <span class="w3-tag w3-small w3-theme-d2">andd</span>
-                                <span class="w3-tag w3-small w3-theme-d1">andd</span>
-                                <span class="w3-tag w3-small w3-theme">andd</span>
-                                <span class="w3-tag w3-small w3-theme-l1">andd</span>
-                                <span class="w3-tag w3-small w3-theme-l2">andd</span>
-                                <span class="w3-tag w3-small w3-theme-l3">andd</span>
-                                <span class="w3-tag w3-small w3-theme-l4">andd</span>
-                                <span class="w3-tag w3-small w3-theme-l5">andd</span>
-                            </p>
+                            <div id="redirectDiv1" style="margin-top: 1px;">
+                                <button onclick="redirectToAddMembers()" class="w3-button w3-block w3-theme-l3 w3-left-align" style="background-color: #55ccff;">Add Members</button>
+                            </div>
+
+                            <script>
+                                function redirectToAddMembers() {
+                                    window.location.href = 'add_members.php';
+                                }
+                            </script>
+
+                            <div id="redirectDiv2" style="margin-top: 1px;">
+                                <button onclick="redirectToBettingRoom()" class="w3-button w3-block w3-theme-l4 w3-left-align" style="background-color: #44ddff;">Go to Betting Room</button>
+                            </div>
+
+                            <script>
+                                function redirectToBettingRoom() {
+                                    window.location.href = 'bettingRooms.php';
+                                }
+                            </script>
+
                         </div>
                     </div>
+
                     <br>
 
                     <!-- Alert Box -->
-                    <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small">
-                        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright">
+                    <div class="w3-container w3-display-container w3-round w3-theme-l4 w3-border w3-theme-border w3-margin-bottom w3-hide-small" style="position: relative; background-color: #f8f8f8; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-theme-l3 w3-display-topright" style="cursor: pointer; padding: 10px; margin-top: 0px; color: #555;">
                             <i class="fa fa-remove"></i>
                         </span>
-                        <p>Upcoming Events:</p>
-                        <!-- <img src="/w3images/forest.jpg" alt="Forest" style="width:100%;"> -->
+                        <h3 style="margin-bottom: 15px;">Upcoming Events:</h3>
                         <?php
                         $currentDate = date('Y-m-d');
                         $sql = "SELECT TblAuction.StartDate, TblAuction.AmountAuctioned, TblGroup.GroupName
-                        FROM TblAuction
-                        JOIN TblGroup ON TblAuction.GroupId = TblGroup.GroupId
-                        WHERE TblAuction.StartDate > '$currentDate'
-                        ORDER BY TblAuction.StartDate ASC
-                        LIMIT 3";
+            FROM TblAuction
+            JOIN TblGroup ON TblAuction.GroupId = TblGroup.GroupId
+            WHERE TblAuction.StartDate > '$currentDate'
+            ORDER BY TblAuction.StartDate ASC
+            LIMIT 3";
 
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
-                            echo '<div style="padding: 15px; background-color:#ec8689; color:#ffffff; border-radius: 4px; margin-bottom: 20px;">';
+                            echo '<div style="background-color: #ec8689; color: #fff; border-radius: 8px; padding: 15px; margin-bottom: 20px;">';
 
                             while ($row = $result->fetch_assoc()) {
-                                echo '-Group: ' . $row['GroupName'] . '<br>' . ' - Date: ' . $row['StartDate'] . '<br>' . ' - Amount: ' . $row['AmountAuctioned'] . '<br>';
+                                echo '<p style="margin-bottom: 10px;">- Group: ' . $row['GroupName'] . '<br>- Date: ' . $row['StartDate'] . '<br>- Amount: ' . $row['AmountAuctioned'] . '</p>';
                             }
                             echo '</div>';
                         } else {
-                            echo '<p>No upcoming auctions</p>';
+                            echo '<p style="color: #555;">No upcoming auctions</p>';
                         }
                         ?>
-
                     </div>
+
 
                     <!-- End Left Column -->
                 </div>
@@ -271,31 +267,35 @@ if (!isset($_SESSION['valid'])) {
                                     <h2>Create Auction</h2>
 
                                     <form action="auction.php" method="post">
-                                        <label for="groupId">Select Group:</label>
-                                        <select name="groupId" id="groupId" required>
-                                            <!-- Fetch and display group options from the database -->
+                                        <label for="agencyId" style="font-weight: bold;">Select Agency:</label>
+                                        <select name="agencyId" id="agencyId" required onchange="fetchGroups()" style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                                            <!-- Fetch and display agency options from the database -->
                                             <?php
-                                            $sql = "SELECT GroupId, GroupName FROM TblGroup";
-                                            $result = $conn->query($sql);
+                                            $sqlAgency = "SELECT AgencyId, AgencyName FROM tblagency";
+                                            $resultAgency = $conn->query($sqlAgency);
 
-                                            if ($result->num_rows > 0) {
-                                                while ($row = $result->fetch_assoc()) {
-                                                    echo '<option value="' . $row['GroupId'] . '">' . $row['GroupName'] . '</option>';
+                                            if ($resultAgency->num_rows > 0) {
+                                                while ($rowAgency = $resultAgency->fetch_assoc()) {
+                                                    echo '<option value="' . $rowAgency['AgencyId'] . '">' . $rowAgency['AgencyName'] . '</option>';
                                                 }
                                             } else {
-                                                echo '<option value="" disabled>No groups available</option>';
+                                                echo '<option value="" disabled>No agencies available</option>';
                                             }
-
                                             ?>
                                         </select>
 
-                                        <label for="auctionDate">Auction Date:</label>
-                                        <input type="date" name="auctionDate" id="auctionDate" required>
+                                        <label for="groupId" style="font-weight: bold;">Select Group:</label>
+                                        <select name="groupId" id="groupId" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+                                            <!-- Groups will be populated dynamically based on the selected agency -->
+                                        </select>
 
-                                        <label for="amountAuctioned">Amount Auctioned:</label>
-                                        <input type="number" name="amountAuctioned" id="amountAuctioned" required>
+                                        <label for="auctionDate" style="font-weight: bold;">Auction Date:</label>
+                                        <input type="date" name="auctionDate" id="auctionDate" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
 
-                                        <button type="submit">Create Auction</button>
+                                        <label for="amountAuctioned" style="font-weight: bold;">Amount Auctioned:</label>
+                                        <input type="number" name="amountAuctioned" id="amountAuctioned" required style="width: 100%; padding: 8px; margin-bottom: 10px;">
+
+                                        <button type="submit" style="background-color: #0192E0; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Create Auction</button>
                                     </form>
                                 </div>
                             </div>
@@ -303,37 +303,69 @@ if (!isset($_SESSION['valid'])) {
                     </div>
 
 
+                    <script>
+                        function fetchGroups() {
+                            var agencyId = document.getElementById("agencyId").value;
+                            var groupIdSelect = document.getElementById("groupId");
+
+                            // Fetch and display group options based on the selected agency
+                            fetch("fetch_groups.php?agencyId=" + agencyId)
+                                .then(response => response.json())
+                                .then(groups => {
+                                    groupIdSelect.innerHTML = ""; // Clear previous options
+
+                                    if (groups.length > 0) {
+                                        groups.forEach(group => {
+                                            var option = document.createElement("option");
+                                            option.value = group.GroupId;
+                                            option.text = group.GroupName;
+                                            groupIdSelect.add(option);
+                                        });
+                                    } else {
+                                        var option = document.createElement("option");
+                                        option.value = "";
+                                        option.text = "No groups available";
+                                        option.disabled = true;
+                                        groupIdSelect.add(option);
+                                    }
+                                })
+                                .catch(error => console.error('Error fetching groups:', error));
+                        }
+                    </script>
 
 
 
-                    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+
+
+                    <!-- <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
 
                         <h2 style="color: #333;">Transaction Details</h2>
 
                         <?php
 
-                        $sql = "SELECT UserId, AmountPaid FROM tblTransaction";
-                        $result = $conn->query($sql);
+                        // $sql = "SELECT UserId, AmountPaid FROM tblTransaction";
+                        // $result = $conn->query($sql);
 
-                        echo '<table style="border-collapse: collapse; width: 100%;">';
-                        echo '<tr style="background-color: #f2f2f2;"><th style="padding: 8px; text-align: left;">User ID</th><th style="padding: 8px; text-align: left;">Amount Paid</th></tr>';
+                        // echo '<table style="border-collapse: collapse; width: 100%;">';
+                        // echo '<tr style="background-color: #f2f2f2;"><th style="padding: 8px; text-align: left;">User ID</th><th style="padding: 8px; text-align: left;">Amount Paid</th></tr>';
 
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                echo '<tr>';
-                                echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['UserId'] . '</td>';
-                                echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['AmountPaid'] . '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="2" style="padding: 8px; border: 1px solid #dddddd;">No transactions found</td></tr>';
-                        }
+                        // if ($result->num_rows > 0) {
+                        //     while ($row = $result->fetch_assoc()) {
+                        //     echo '<tr>';
+                        //     echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['UserId'] . '</td>';
+                        //     echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['AmountPaid'] . '</td>';
+                        //     echo '</tr>';
+                        // }
+                        // } else {
+                        //     echo '<tr><td colspan="2" style="padding: 8px; border: 1px solid #dddddd;">No transactions found</td></tr>';
+                        // }
 
-                        echo '</table>';
+                        // echo '</table>';
+                        // 
                         ?>
 
                     </div>
-
+ -->
 
                     <!-- --------------- -->
 
@@ -343,44 +375,21 @@ if (!isset($_SESSION['valid'])) {
                     <!-- ------------- -->
 
 
-
-                    <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+                    <div class="w3-container w3-card w3-white w3-round w3-margin" id="includedContent"><br>
                         <h2 style="color: #333;">Auction Details</h2>
-                        <?php
-                        // Fetch auction details from the database
-                        $sql = "SELECT TblAuction.StartDate, TblAuction.AmountAuctioned, TblGroup.GroupName
-            FROM TblAuction
-            JOIN TblGroup ON TblAuction.GroupId = TblGroup.GroupId";
-                        $result = $conn->query($sql);
-
-                        if ($result === false) {
-                            // Query execution failed
-                            echo "<p style='color: red;'>Error: " . $conn->error . "</p>";
-                        } else {
-                            echo '<table style="border-collapse: collapse; width: 100%;">';
-                            echo '<tr style="background-color: #f2f2f2;"><th style="padding: 8px; text-align: left;">Group Name</th><th style="padding: 8px; text-align: left;">Auction Date</th><th style="padding: 8px; text-align: left;">Amount Auctioned</th></tr>';
-
-
-                            if ($result->num_rows > 0) {
-                                while ($row = $result->fetch_assoc()) {
-                                    echo '<tr>';
-                                    echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['GroupName'] . '</td>';
-                                    echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['StartDate'] . '</td>';
-                                    echo '<td style="padding: 8px; border: 1px solid #dddddd;">' . $row['AmountAuctioned'] . '</td>';
-                                    echo '</tr>';
-                                }
-                            } else {
-                                echo '<tr><td colspan="3" style="padding: 8px; border: 1px solid #dddddd;">No auction details found</td></tr>';
-                            }
-
-                            echo '</table>';
-                        }
-
-                        ?>
+                        <script>
+                            // Fetch the content of the HTML file using fetch API
+                            fetch('admin_manage_bids.php')
+                                .then(response => response.text())
+                                .then(data => {
+                                    // Insert the content into the specified element
+                                    document.getElementById('formContainer').innerHTML = data;
+                                })
+                                .catch(error => console.error('Error fetching included file:', error));
+                        </script>
                     </div>
 
-                    <button onclick="location.href='Trans.php'">Go to Transactions Page</button>
-            
+
 
                     <!-- ------------ -->
 
@@ -391,98 +400,26 @@ if (!isset($_SESSION['valid'])) {
                 <div class="w3-col m2">
                     <div class="w3-card w3-round w3-white w3-center">
                         <div class="w3-container">
-                            <div id="redirectDiv">
-                                <button onclick="redirectToCreateGroups()">Create Groups</button>
-                            </div>
-
-                            <script>
-                                function redirectToCreateGroups() {
-                                    window.location.href = 'Add.php';
-                                }
-                            </script>
-
-                            <br>
-
-                            <div id="redirectDiv1">
-                                <button onclick="redirectToAddMembers()">Add Members</button>
-                            </div>
-
-                            <script>
-                                function redirectToAddMembers() {
-                                    window.location.href = 'add_members.php';
-                                }
-                            </script>
-                        </div>
-                    </div>
-
-                    <br>
-
-                    <br>
-
-                    <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
-
-
-                        <!-- Add a dropdown for agency selection -->
-                        <form method="get">
-                            <label for="agency">Select Agency:</label>
-                            <select id="agency" name="agency" onchange="this.form.submit()">
-                                <option value="" disabled selected>Select an Agency</option>
-                                <?php
-
-                                // Fetch all unique agencies from TblGroup
-                                $agencyQuery = "SELECT DISTINCT Agency FROM TblGroup";
-                                $agencyResult = $conn->query($agencyQuery);
-
-                                if ($agencyResult->num_rows > 0) {
-                                    while ($row = $agencyResult->fetch_assoc()) {
-                                        $selected = ($_GET['agency'] == $row['Agency']) ? 'selected' : '';
-                                        echo "<option value='{$row['Agency']}' $selected>{$row['Agency']}</option>";
-                                    }
-                                }
-                                ?>
-                            </select>
-                        </form>
-
-                        <!-- Display bids for the selected agency -->
-
-
-                        <!-- Display bids for the selected agency and group -->
-                        <div>
-                            <?php
-
-
-                            // Fetch all bids from the database for the specific agency or group
-                            if (isset($_GET['agency']) && isset($_GET['group'])) {
-                                $selectedAgency = $_GET['agency'];
-                                $selectedGroup = $_GET['group'];
-
-                                $sql = "SELECT TblBids.BidId, TblBids.UserId, TblBids.RequestedAmount, TblBids.Reason, TblUser.username
-                FROM TblBids
-                JOIN TblUser ON TblBids.UserId = TblUser.UserId
-                JOIN TblUserType ON TblUser.UserType = TblUserType.UserType
-                JOIN TblGroup ON TblUserType.GroupName = TblGroup.GroupName
-                WHERE TblGroup.Agency = '$selectedAgency' AND TblUserType.GroupName = '$selectedGroup'";
-
-                                $result = $conn->query($sql);
-
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<div>";
-                                        echo "<p>Employee ID: {$row['UserId']} ({$row['username']})</p>";
-                                        echo "<p>Requested Amount: {$row['RequestedAmount']}</p>";
-                                        echo "<p>Reason: {$row['Reason']}</p>";
-                                        echo "<button onclick='acceptBid({$row['BidId']})'>Accept</button>";
-                                        echo "</div>";
-                                    }
-                                } else {
-                                    echo "<p>No bids found</p>";
-                                }
-                            }
-
+                        <?php
+                            // Include the payment.php file
+                            include("payment.php");
                             ?>
                         </div>
+                            </div>
+                </div>
+
+                        <br>
+
+                        <br>
+
+                        <!-- <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+                            <?php
+                            // Include the payment.php file
+                            // include("payment.php");
+                            ?>
 
 
+                        </div> -->
                         <!-- <h2>Admin View - All Bids</h2>
 
 <table>
