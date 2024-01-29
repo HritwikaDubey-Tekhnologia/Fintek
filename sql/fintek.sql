@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2024 at 04:01 PM
+-- Generation Time: Jan 29, 2024 at 04:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -61,7 +61,11 @@ CREATE TABLE `tblauction` (
 INSERT INTO `tblauction` (`AuctionId`, `GroupId`, `StartDate`, `EndDate`, `AmountAuctioned`) VALUES
 (1, 2, '2023-10-25', '2023-11-09', 35000),
 (2, 2, '2023-11-11', '2023-11-20', 50000),
-(3, 1, '2023-11-11', '2023-11-20', 50000);
+(3, 1, '2023-11-11', '2023-11-20', 50000),
+(4, 2, '2024-02-02', NULL, 40000),
+(5, 2, '2024-02-04', NULL, 4567),
+(6, 2, '2024-01-27', NULL, 60000),
+(7, 1, '2024-01-30', NULL, 50000);
 
 -- --------------------------------------------------------
 
@@ -83,7 +87,9 @@ CREATE TABLE `tblbids` (
 
 INSERT INTO `tblbids` (`BidId`, `UserId`, `RequestedAmount`, `Reason`, `BidDate`) VALUES
 (1, 1, 30000, 'Education', '2024-01-10 15:01:03'),
-(2, 2, 20000, 'Surgery', '2024-01-10 15:01:19');
+(2, 2, 20000, 'Surgery', '2024-01-10 15:01:19'),
+(3, 9, 10000, NULL, '2024-01-17 09:23:00'),
+(4, 1, 1000, 'Educationa', '2024-01-20 11:41:36');
 
 -- --------------------------------------------------------
 
@@ -106,8 +112,9 @@ CREATE TABLE `tblgroup` (
 
 INSERT INTO `tblgroup` (`GroupId`, `GroupName`, `StartDate`, `Amount`, `AgencyPercentage`, `AgencyId`) VALUES
 (1, 'UI Designers', '2023-01-01', 100000, 5.00, 1),
-(2, 'Developers', '2023-09-08', 450000, 6.00, 1),
-(3, 'Teachers', '2024-02-01', 350000, 7.00, 2);
+(2, 'Developers', '2023-09-08', -587, 6.00, 1),
+(3, 'Teachers', '2024-02-01', 350000, 7.00, 2),
+(4, 'Testers', '2024-01-31', 45000, 3.00, 1);
 
 -- --------------------------------------------------------
 
@@ -127,8 +134,11 @@ CREATE TABLE `tbltransaction` (
 --
 
 INSERT INTO `tbltransaction` (`TransactionId`, `UserId`, `AmountPaid`, `TransactionTime`) VALUES
-(1, 1, 20000, '2024-01-10 14:50:10'),
-(2, 2, 20000, '2024-01-10 14:50:59');
+(1, 1, -3064, '2024-01-10 14:50:10'),
+(2, 2, 30000, '2024-01-10 14:50:59'),
+(3, 9, -3064, '2024-01-17 09:16:47'),
+(4, 10, -3064, '2024-01-27 14:12:58'),
+(5, 11, 0, '2024-01-27 14:25:01');
 
 -- --------------------------------------------------------
 
@@ -150,14 +160,13 @@ CREATE TABLE `tbluser` (
 --
 
 INSERT INTO `tbluser` (`UserId`, `UserName`, `Password`, `UserTypeId`, `GroupId`, `AgencyId`) VALUES
-(1, 'Hritwika', 'hrit123', NULL, 2, 1),
-(2, 'Sakshi', 'sak123', NULL, 1, 1),
+(1, 'Hritwika', 'hrit123', 5, 2, 1),
+(2, 'Sakshi', 'sak123', 5, 1, 1),
 (3, 'Admin', 'admin', 2, NULL, 1),
 (4, 'SuperAdmin', 'superadmin', NULL, NULL, NULL),
-(5, 'Hritwika', 'hrit123', NULL, 2, 1),
-(6, 'Sakshi', 'sak123', NULL, 1, 1),
-(7, 'Admin', 'admin', 2, NULL, 1),
-(8, 'SuperAdmin', 'superadmin', NULL, NULL, NULL);
+(9, 'Rushi', 'rush123', 5, 2, 1),
+(10, 'Shubham', '12345', 5, 2, NULL),
+(11, 'Aarti', 'arti123', 2, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -177,9 +186,9 @@ CREATE TABLE `tblusergroup` (
 
 INSERT INTO `tblusergroup` (`UserGroupId`, `UserId`, `GroupId`) VALUES
 (1, 2, 1),
-(2, 6, 1),
-(3, 1, 2),
-(4, 5, 2);
+(2, 1, 2),
+(3, 10, 2),
+(4, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -279,37 +288,37 @@ ALTER TABLE `tblagency`
 -- AUTO_INCREMENT for table `tblauction`
 --
 ALTER TABLE `tblauction`
-  MODIFY `AuctionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `AuctionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tblbids`
 --
 ALTER TABLE `tblbids`
-  MODIFY `BidId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `BidId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblgroup`
 --
 ALTER TABLE `tblgroup`
-  MODIFY `GroupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `GroupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbltransaction`
 --
 ALTER TABLE `tbltransaction`
-  MODIFY `TransactionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `TransactionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tblusergroup`
 --
 ALTER TABLE `tblusergroup`
-  MODIFY `UserGroupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `UserGroupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblusertype`
